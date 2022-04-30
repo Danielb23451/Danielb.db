@@ -1,4 +1,4 @@
-# RangeEvents-API
+# Danielb.db
 
 <img src="https://cdn.discordapp.com/avatars/789486325396406302/3b48f8a44b87b2bbdb9147e364232c28.png" alt="Logo" width="200"/>    
    
@@ -13,7 +13,7 @@ npm install danielb.db
 
 ## Documentation
 
-getCurrnetGiveaways(guildId) - Get curnnet giveaways in server
+**Soon**
 
 
 ## Example
