@@ -5,7 +5,7 @@ module.exports = function() {
 
     function runFunction(method, params, type, path) {
         if (params.id && typeof params.id !== 'string') return new TypeError("The Paramter Must Be A String");
-        db.prepare(`CREATE TABLE IF NOT EXISTS database (ID TEXT, json TEXT)`).run();
+        db.prepare('CREATE TABLE IF NOT EXISTS json (ID TEXT, json TEXT)').run();
         if (params.data && params.data === Infinity) return new TypeError("The Data Cannot Be Infinity Number");
         if (params.id && params.id.includes("_")) {
             let unparsed = params.id.split("_");

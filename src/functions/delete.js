@@ -1,12 +1,12 @@
 module.exports = function(db, params) {
-    let get = db.prepare(`SELECT * FROM database WHERE ID = (?)`).get(params.id);
+    let get = db.prepare(`SELECT * FROM json WHERE ID = (?)`).get(params.id);
     if (!get) return false;
     else get = JSON.parse(get.json);
     if (typeof get === 'object') {
       get = JSON.stringify(get);
-      db.prepare(`UPDATE database SET database = (?) WHERE ID = (?)`).run(get, params.id);
+      db.prepare(`UPDATE json SET json = (?) WHERE ID = (?)`).run(get, params.id);
       return true;
     }
-    else db.prepare(`DELETE FROM database WHERE ID = (?)`).run(params.id);
+    else db.prepare(`DELETE FROM json WHERE ID = (?)`).run(params.id);
     return true;
   }
