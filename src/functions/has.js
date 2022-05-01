@@ -1,7 +1,7 @@
 module.exports = function(db, params) {
-    let fetched = db.prepare(`SELECT * FROM json WHERE ID = (?)`).get(params.id);
-    if (!fetched) return false;
-    else fetched = JSON.parse(fetched.json);
-    return (typeof fetched != 'undefined');
+    let get = db.prepare(`SELECT * FROM database WHERE ID = (?)`).get(params.id);
+    if (!get) return false;
+    else get = JSON.parse(get.json);
+    return (typeof get != 'undefined');
     
   }

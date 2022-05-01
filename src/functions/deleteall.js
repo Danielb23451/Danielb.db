@@ -1,5 +1,5 @@
 module.exports = function(db, params) {  
-    let fetched = db.prepare(`DELETE FROM json`).run();
-    if(!fetched) return false;
+    let get = db.prepare(`DELETE FROM database`).run();
+    if(!get) return false;
     return true;
   }

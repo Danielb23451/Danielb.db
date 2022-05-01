@@ -1,7 +1,7 @@
 module.exports = function(db, params) {  
-    var stmt = db.prepare(`SELECT * FROM json WHERE ID IS NOT NULL`);
+    var get = db.prepare(`SELECT * FROM database WHERE ID IS NOT NULL`);
     let response = [];
-    for (var row of stmt.iterate()) {
+    for (var row of get.iterate()) {
       try {
         let data = JSON.parse(row.json)
         response.push({
