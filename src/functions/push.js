@@ -10,7 +10,7 @@ module.exports = function (db, params) {
     get.json.push(params.data);
     params.data = get.json;
     params.data = JSON.stringify(params.data);
-    db.prepare(`UPDATE json SET database = (?) WHERE ID = (?)`).run(params.data, params.id);
+    db.prepare(`UPDATE database SET database = (?) WHERE ID = (?)`).run(params.data, params.id);
     let newData = db.prepare(`SELECT * FROM database WHERE ID = (?)`).get(params.id).json;
     if (newData === '{}') return undefined;
     else {

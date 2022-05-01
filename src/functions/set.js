@@ -4,11 +4,11 @@ module.exports = function(db, params) {
       db.prepare(`INSERT INTO database (ID,json) VALUES (?,?)`).run(params.id, '{}');
       get = db.prepare(`SELECT * FROM database WHERE ID = (?)`).get(params.id);
     }
-    get = JSON.parse(fetched.json);
+    get = JSON.parse(get.json);
     params.data = JSON.stringify(params.data);
-    db.prepare(`UPDATE database SET json = (?) WHERE ID = (?)`).run(params.data, params.id);
+    db.prepare(`UPDATE database SET database = (?) WHERE ID = (?)`).run(params.data, params.id);
     let newData = db.prepare(`SELECT * FROM database WHERE ID = (?)`).get(params.id).json;
-    if (newData === '{}') return null;
+    if (newData === '{}') return undefined;
     else {
       newData = JSON.parse(newData)
       return newData

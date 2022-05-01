@@ -1,7 +1,7 @@
 {
   "name": "danielb.db",
-  "version": "1.0.8",
-  "description": "",
+  "version": "1.1.6",
+  "description": "A complete and easy database of better-sqlite3 for discord. ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,11 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/Danielb23451/Danielb.db.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "database",
+    "db",
+    "sqlite",
+    "discord",
+    "better-sqlite3"
+  ],
+  "author": "Danielb",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Danielb23451/Danielb.db/issues"
   },
-  "homepage": "https://github.com/Danielb23451/Danielb.db#readme"
+  "homepage": "https://github.com/Danielb23451/Danielb.db#readme",
+  "dependencies": {
+    "fs": "latest",
+    "better-sqlite3": "latest"
+  }
 }

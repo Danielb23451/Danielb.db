@@ -7,9 +7,9 @@ module.exports = function (db, params) {
   if (get.json === '{}') get.json = 0;
   else get.json = JSON.parse(get.json)
   if (typeof get.json !== 'number') return new TypeError(`The Old ID Isnt Vaild Number`);
-  params.data = parseFloat(get.json, 10) + parseFloat(params.data, 10);
+  params.data = parseInt(get.json, 10) + parseInt(params.data, 10);
   params.data = JSON.stringify(params.data);
-  db.prepare(`UPDATE json SET database = (?) WHERE ID = (?)`).run(params.data, params.id);
+  db.prepare(`UPDATE database SET database = (?) WHERE ID = (?)`).run(params.data, params.id);
   let newData = db.prepare(`SELECT * FROM database WHERE ID = (?)`).get(params.id).json;
   if (newData === '{}') return undefined;
   else {

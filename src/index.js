@@ -3,23 +3,28 @@ module.exports = function() {
     const Database = require("better-sqlite3");
     const db = new Database("./db.sqlite");
 
-    function runFunction(method, params) {
+    function runFunction(method, params, type, path) {
         if (params.id && typeof params.id !== 'string') return new TypeError("The Paramter Must Be A String");
-        db.prepare(`CREATE TABLE IF NOT EXISTS json (ID TEXT, json TEXT)`).run();
+        db.prepare(`CREATE TABLE IF NOT EXISTS database (ID TEXT, json TEXT)`).run();
         if (params.data && params.data === Infinity) return new TypeError("The Data Cannot Be Infinity Number");
         if (params.id && params.id.includes("_")) {
             let unparsed = params.id.split("_");
             params.id = unparsed.shift();
+        }
+
+        if (type && path) {
+            if (type !== 'sqlite' && type !== 'json') return new TypeError('The Type Must Be A sqlite/json')
+            return methods[method](db, params, type, path);
         }
         return methods[method](db, params);
     }
 
     var methods = {
         get: require("./functions/get.js"),
-        //set: require("./functions/set.js"),
+        set: require("./functions/set.js"),
         //unset: require("./functions/unset.js"),
         add: require("./functions/add.js"),
-        //subtract: require("./functions/subtract.js"),
+        subtract: require("./functions/subtract.js"),
         push: require("./functions/push.js"),
         delete: require("./functions/delete.js"),
         deleteAll: require("./functions/deleteall.js"),
@@ -27,6 +32,8 @@ module.exports = function() {
         all: require("./functions/all.js"),
         typeof: require("./functions/typeof.js"),
         last: require("./functions/last.js"),
+        backup: require('./functions/backup.js'),
+        moveFrom: require('./functions/moveFrom.js')
     };
 
     let object = {
@@ -125,6 +132,10 @@ module.exports = function() {
 
         last: function () {
             return runFunction("last", {});
+        },
+        moveFrom: function (type, path) {
+            if (typeof type !== 'string') return new TypeError("Type Must Be A String");
+            return runFunction("moveFrom", {}, type, path);
         },
     };
     return object;
