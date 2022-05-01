@@ -33,7 +33,9 @@ module.exports = function() {
         typeof: require("./functions/typeof.js"),
         last: require("./functions/last.js"),
         backup: require('./functions/backup.js'),
-        moveFrom: require('./functions/moveFrom.js')
+        //moveFrom: require('./functions/moveFrom.js'),
+        toJson: require('./functions/toJson.js'),
+        math: require('./functions/math.js'),
     };
 
     let object = {
@@ -103,6 +105,11 @@ module.exports = function() {
             return runFunction("has", { id: key });
         },
 
+        exists: function (key) {
+            if (!key) return new TypeError("No Key Specified");
+            return runFunction("has", { id: key });
+        },
+
         includes: function (key) {
             if (!key) return new TypeError("No Key Specified");
             return runFunction("has", { id: key });
@@ -133,10 +140,19 @@ module.exports = function() {
         last: function () {
             return runFunction("last", {});
         },
-        moveFrom: function (type, path) {
-            if (typeof type !== 'string') return new TypeError("Type Must Be A String");
-            return runFunction("moveFrom", {}, type, path);
+
+        toJson: function () {
+            return runFunction("toJson", {});
         },
-    };
+
+        math: function(key, data, operator) {
+            const list = ["*", "%", "-", "+", "/"]
+            if (!key) return new TypeError("No Key Specified");
+            if (!data || typeof data !== 'number') return new TypeError("Please specify a vaild data");
+            if (!operator || typeof operator !== 'string' || !list.includes(operator)) return new TypeError("Please specify a vaild operator");
+            return runFunction("math", { id: key, data: data, operator: operator });
+        },
+
+        };
     return object;
 }
