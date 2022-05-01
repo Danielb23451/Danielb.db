@@ -36,6 +36,7 @@ module.exports = function() {
         //moveFrom: require('./functions/moveFrom.js'),
         toJson: require('./functions/toJson.js'),
         math: require('./functions/math.js'),
+        size: require('./functions/size.js')
     };
 
     let object = {
@@ -69,6 +70,12 @@ module.exports = function() {
         },
 
         subtract: function (key, data) {
+            if (!key) return new TypeError("No Key Specified");
+            if (!data || typeof data !== 'number') return new TypeError("Please specify a vaild data");
+            return runFunction("subtract", { id: key, data: data });
+        },
+
+        remove: function (key, data) {
             if (!key) return new TypeError("No Key Specified");
             if (!data || typeof data !== 'number') return new TypeError("Please specify a vaild data");
             return runFunction("subtract", { id: key, data: data });
@@ -151,6 +158,10 @@ module.exports = function() {
             if (!data || typeof data !== 'number') return new TypeError("Please specify a vaild data");
             if (!operator || typeof operator !== 'string' || !list.includes(operator)) return new TypeError("Please specify a vaild operator");
             return runFunction("math", { id: key, data: data, operator: operator });
+        },
+
+        size: function () {
+            return runFunction("size", {});
         },
 
         };
