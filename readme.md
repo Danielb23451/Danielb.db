@@ -13,7 +13,40 @@ npm install danielb.db
 
 ## Documentation
 
-**Soon**
+```js
+const db = require('danielb.db')
+db.set('test', 'test') //set key as string => test
+db.add('test1', 1) // add number to key (if key dont exites the key will be the number) => 1
+db.remove('test1', 1) // remove number to key (if key dont exites the key will be 0) => 0
+db.subtract('test1', 1) // remove number to key (if key dont exites the key will be 0) => 0
+db.math('test1', 5, '*') // use another operator (in the example its multiplier) => 5
+
+db.all() // get all keys and values in the databse in array => [{ ID: 'test1', data: 1}, { ID: 'test', data: 'test' }]
+db.getAll() // get all keys and values in the databse in array => [{ ID: 'test1', data: 1}, { ID: 'test', data: 'test' }]
+db.fetchAll() // get all keys and values in the databse in array => [{ ID: 'test1', data: 1}, { ID: 'test', data: 'test' }]
+db.toJson() // get all keys and values in the databse in json => {'test1': 1, 'test': 'test' }
+
+db.size() // return number of keys in the database => 2
+
+db.backup() // backup all database in new file => true
+
+db.deleteAll() // delete all keys and values in the database => true
+db.clear()// delete all keys and values in the database => true
+
+db.delete('test') // delete key in the database => true
+db.del('test') // delete key in the database => true
+
+db.get('test') // get key in the database => 'test'
+db.fetch('test') // get key in the database => 'test'
+
+db.has('test') // check if key exites in the databse => true
+db.exists('test') // check if key exites in the databse => true
+db.includes('test') // check if key exites in the databse => true
+
+db.type('test') // get type of key in the database => string
+db.typeof('test') // get type of key in the database => string
+
+```
 
 
 ## Example
@@ -24,12 +57,6 @@ const db = require("danielb.db");
 client.on("ready", () => {
    console.log(`Logged in as ${client.user.tag}`);
 });
-
-db.set('test', 'test')
-db.add('test1', 1)
-db.all()
-db.deleteAll()
-db.delete('test')
 
 client.login("TOKEN");
 ```

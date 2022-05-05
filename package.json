@@ -1,6 +1,6 @@
 {
   "name": "danielb.db",
-  "version": "1.1.9",
+  "version": "1.2.1",
   "description": "A complete and easy database of better-sqlite3 for discord. ",
   "main": "index.js",
   "scripts": {

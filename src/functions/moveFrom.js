@@ -14,7 +14,7 @@ module.exports = function(db, params, type, path) {
         for (var row of get.iterate()) {
             try {
             let data = JSON.parse(row.json)
-            db.prepare(`UPDATE database SET database = (?) WHERE ID = (?)`).run(data, row.ID);
+            db.prepare(`UPDATE json SET json = (?) WHERE ID = (?)`).run(data, row.ID);
             return true 
             } catch(e) {
                 return false

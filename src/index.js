@@ -7,10 +7,6 @@ module.exports = function() {
         if (params.id && typeof params.id !== 'string') return new TypeError("The Paramter Must Be A String");
         db.prepare('CREATE TABLE IF NOT EXISTS json (ID TEXT, json TEXT)').run();
         if (params.data && params.data === Infinity) return new TypeError("The Data Cannot Be Infinity Number");
-        if (params.id && params.id.includes("_")) {
-            let unparsed = params.id.split("_");
-            params.id = unparsed.shift();
-        }
 
         if (type && path) {
             if (type !== 'sqlite' && type !== 'json') return new TypeError('The Type Must Be A sqlite/json')
@@ -22,7 +18,6 @@ module.exports = function() {
     var methods = {
         get: require("./functions/get.js"),
         set: require("./functions/set.js"),
-        //unset: require("./functions/unset.js"),
         add: require("./functions/add.js"),
         subtract: require("./functions/subtract.js"),
         push: require("./functions/push.js"),
@@ -33,7 +28,6 @@ module.exports = function() {
         typeof: require("./functions/typeof.js"),
         last: require("./functions/last.js"),
         backup: require('./functions/backup.js'),
-        //moveFrom: require('./functions/moveFrom.js'),
         toJson: require('./functions/toJson.js'),
         math: require('./functions/math.js'),
         size: require('./functions/size.js')
@@ -55,12 +49,6 @@ module.exports = function() {
             if (!key) return new TypeError("No Key Specified");
             if (!data) return new TypeError("No Value Specified");
             return runFunction("set", { id: key, data: data });
-        },
-
-        unset: function (key, data) {
-            if (!key) return new TypeError("No Key Specified");
-            if (!data) return new TypeError("No Value Specified");
-            return runFunction("unset", { id: key, data: data });
         },
 
         add: function (key, data) {
@@ -97,9 +85,8 @@ module.exports = function() {
             return runFunction("delete", { id: key });
         },
 
-        deleteAll: function (key) {
-            if (!key) return new TypeError("No Key Specified");
-            return runFunction("deleteAll", { id: key });
+        deleteAll: function () {
+            return runFunction("deleteAll", {});
         },
 
         clear: function (key) {
@@ -162,6 +149,10 @@ module.exports = function() {
 
         size: function () {
             return runFunction("size", {});
+        },
+
+        backup: function () {
+            return runFunction("backup", {});
         },
 
         };

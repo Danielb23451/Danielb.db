@@ -6,7 +6,7 @@ module.exports = function (db, params) {
     }
     if (get.json === '{}') get.json = 0;
     else get.json = JSON.parse(get.json)
-    if (typeof fetched.json !== 'number') return new TypeError('The Data Must Be A Number');
+    if (typeof get.json !== 'number') return new TypeError('The Data Must Be A Number');
     params.data = parseInt(get.json, 10) - parseInt(params.data, 10);
     params.data = JSON.stringify(params.data);
     db.prepare(`UPDATE json SET json = (?) WHERE ID = (?)`).run(params.data, params.id);
