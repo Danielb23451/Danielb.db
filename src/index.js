@@ -30,7 +30,9 @@ module.exports = function() {
         backup: require('./functions/backup.js'),
         toJson: require('./functions/toJson.js'),
         math: require('./functions/math.js'),
-        size: require('./functions/size.js')
+        size: require('./functions/size.js'),
+        pull: require('./functions/pull.js'),
+        filter: require('./functions/filter.js')
     };
 
     let object = {
@@ -149,6 +151,17 @@ module.exports = function() {
 
         size: function () {
             return runFunction("size", {});
+        },
+
+        pull: function (key, value) {
+            if (!key) return new TypeError("No Key Specified");
+            if (!data) return new TypeError("Please specify a vaild data");
+            return runFunction("pull", { id: key, data: data });
+        },
+
+        filter: function (filterFN) {
+            if (!filterFN || typeof filterFN != 'function') return new TypeError("No Function Specified");
+            return runFunction("filter", { filter: filterFN });
         },
 
         backup: function () {
