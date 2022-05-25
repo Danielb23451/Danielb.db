@@ -1,7 +1,7 @@
 {
   "name": "danielb.db",
-  "version": "1.2.3",
-  "description": "A complete and easy database of better-sqlite3 for discord. ",
+  "version": "1.2.4",
+  "description": "A complete and easy database of better-sqlite3 for discord.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -32,7 +32,9 @@ module.exports = function() {
         math: require('./functions/math.js'),
         size: require('./functions/size.js'),
         pull: require('./functions/pull.js'),
-        filter: require('./functions/filter.js')
+        filter: require('./functions/filter.js'),
+        startsWith: require('./functions/startswith.js'),
+        endsWith: require('./functions/endswith.js'),
     };
 
     let object = {
@@ -153,7 +155,7 @@ module.exports = function() {
             return runFunction("size", {});
         },
 
-        pull: function (key, value) {
+        pull: function (key, data) {
             if (!key) return new TypeError("No Key Specified");
             if (!data) return new TypeError("Please specify a vaild data");
             return runFunction("pull", { id: key, data: data });
@@ -162,6 +164,16 @@ module.exports = function() {
         filter: function (filterFN) {
             if (!filterFN || typeof filterFN != 'function') return new TypeError("No Function Specified");
             return runFunction("filter", { filter: filterFN });
+        },
+
+        startsWith: function(key) {
+            if (!key) return new TypeError("No Key Specified");
+            return runFunction("startsWith", { id: key });
+        },
+
+        endsWith: function(key) {
+            if (!key) return new TypeError("No Key Specified");
+            return runFunction("endsWith", { id: key });
         },
 
         backup: function () {
